@@ -15,9 +15,6 @@ public class PacienteServiceImpl implements PacienteService{
 	@Autowired
 	private PacienteRepository pacienteRepository;
 	
-	@Autowired
-	private DomicilioServiceImpl domicilioServiceImpl;
-	
 	@Override
 	public List<Paciente> listar() {
 		return pacienteRepository.findAll();
@@ -30,7 +27,6 @@ public class PacienteServiceImpl implements PacienteService{
 
 	@Override
 	public Paciente crear(Paciente paciente) {
-		paciente.setDomicilio(domicilioServiceImpl.crear(paciente.getDomicilio()));
 		return pacienteRepository.save(paciente);
 	}
 
@@ -41,14 +37,7 @@ public class PacienteServiceImpl implements PacienteService{
 
 	@Override
 	public Paciente editar(Paciente paciente) {
-		Optional<Paciente> p = pacienteRepository.findById(paciente.getId());
-		p.get().setNombre(paciente.getNombre());
-		p.get().setApellido(paciente.getApellido());
-		p.get().setDni(paciente.getDni());
-		p.get().setFechaIngreso(paciente.getFechaIngreso());
-		if(paciente.getDomicilio() != null)
-		domicilioServiceImpl.editar(paciente.getDomicilio());
-		return pacienteRepository.save(p.get());
+		return pacienteRepository.save(paciente);
 	}
 
 }

@@ -1,0 +1,8 @@
+[2021-09-20 18:21:41] [ INFO ] [OdontologoController:73] Devolvemos una lista de 0 pacientes
+[2021-09-20 18:21:49] [ INFO ] [OdontologoController:33] Se guardo el paciente Paciente(id=1, nombre=Jhonahtn, apellido=Antonio, dni=123123123, fechaIngreso=Thu Oct 26 21:00:00 ART 2000, domicilio=Domicilio(id=1, calle=Av. Gaona, numero=714, localidad=Floresta, provincia=Bs As))
+[2021-09-20 18:22:40] [ INFO ] [OdontologoController:73] Devolvemos una lista de 0 pacientes
+[2021-09-20 18:22:43] [ INFO ] [OdontologoController:33] Se guardo el paciente Paciente(id=1, nombre=Jhonahtn, apellido=Antonio, dni=123123123, fechaIngreso=Thu Oct 26 21:00:00 ART 2000, domicilio=Domicilio(id=1, calle=Av. Gaona, numero=714, localidad=Floresta, provincia=Bs As))
+[2021-09-20 18:23:57] [ WARN ] [OdontologoController:55] No existe el odontologo con id: null
+[2021-09-20 18:24:05] [ INFO ] [OdontologoController:73] Devolvemos una lista de 1 pacientes
+[2021-09-20 18:24:41] [ WARN ] [OdontologoController:55] No existe el odontologo con id: null
+[2021-09-20 18:25:39] [ INFO ] [OdontologoController:73] Devolvemos una lista de 1 pacientes

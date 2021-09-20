@@ -37,12 +37,7 @@ public class DomicilioServiceImpl implements DomicilioService{
 
 	@Override
 	public Domicilio editar(Domicilio domicilio) {
-		Optional<Domicilio> d = domicilioRepository.findById(domicilio.getId());
-		d.get().setCalle(domicilio.getCalle());
-		d.get().setNumero(domicilio.getNumero());
-		d.get().setLocalidad(domicilio.getLocalidad());
-		d.get().setProvincia(domicilio.getProvincia());
-		return domicilioRepository.save(d.get());
+		return domicilioRepository.save(domicilio);
 	}
 
 }

@@ -38,12 +38,7 @@ public class OdontologoServiceImpl implements OdontologoService{
 
 	@Override
 	public Odontologo editar(Odontologo odontologo) {
-		Optional<Odontologo> o = odontologoRepository.findById(odontologo.getId());
-		o.get().setNombre(odontologo.getNombre());
-		o.get().setApellido(odontologo.getApellido());
-		o.get().setMatricula(odontologo.getMatricula());
-		//o.get().setPacientes(odontologo.getPacientes());
-		return odontologoRepository.save(o.get());
+		return odontologoRepository.save(odontologo);
 	}
 
 }
