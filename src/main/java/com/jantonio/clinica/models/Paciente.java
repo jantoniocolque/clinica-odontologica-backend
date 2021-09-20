@@ -4,10 +4,12 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -44,6 +46,12 @@ public class Paciente {
 	@JoinColumn(name="id_domicilios",referencedColumnName = "id")
 	@Getter @Setter
     private Domicilio domicilio;
+	
+	/*@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_odontologo")
+	@Getter @Setter
+	@ToString.Exclude
+    private Odontologo odontologo;*/
 
     public Paciente() {
     }
@@ -63,9 +71,9 @@ public class Paciente {
         this.apellido = apellido;
         this.dni = dni;
         this.fechaIngreso = fechaIngreso;
-        this.domicilio = domicilio;
+        
     }
-
-
+    
+    
     
 }

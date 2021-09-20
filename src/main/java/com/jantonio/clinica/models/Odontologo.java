@@ -1,9 +1,15 @@
 package com.jantonio.clinica.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -42,5 +48,11 @@ public class Odontologo {
         this.nombre = nombre;
         this.apellido = apellido;
         this.matricula = matricula;
+        /*this.pacientes = pacientes;*/
     }
+    /*
+    @OneToMany(mappedBy = "odontologo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Getter @Setter
+    private Set<Paciente> pacientes = new HashSet<>();
+    */
 }

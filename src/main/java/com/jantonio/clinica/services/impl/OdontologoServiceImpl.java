@@ -42,6 +42,7 @@ public class OdontologoServiceImpl implements OdontologoService{
 		o.get().setNombre(odontologo.getNombre());
 		o.get().setApellido(odontologo.getApellido());
 		o.get().setMatricula(odontologo.getMatricula());
+		//o.get().setPacientes(odontologo.getPacientes());
 		return odontologoRepository.save(o.get());
 	}
 

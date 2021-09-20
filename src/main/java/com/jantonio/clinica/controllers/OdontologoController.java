@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jantonio.clinica.models.Odontologo;
+import com.jantonio.clinica.models.Paciente;
 import com.jantonio.clinica.services.OdontologoService;
 
 @RestController
 @RequestMapping("api/odontologos")
+@CrossOrigin("*")
 public class OdontologoController {
 	private static final Logger logger = Logger.getLogger(OdontologoController.class);
 	@Autowired
@@ -72,4 +75,11 @@ public class OdontologoController {
 		logger.info("Devolvemos una lista de "+odontologos.size()+" odontologos");
 		return ResponseEntity.ok(odontologos);
     }
+    
+    /*@PostMapping("/paciente")
+    public ResponseEntity<Odontologo> guardarPaciente(@RequestBody Paciente paciente){
+    	Odontologo o = paciente.getOdontologo();
+    	o.addPaciente(paciente);
+    	return ResponseEntity.ok(o);
+    }*/
 }
