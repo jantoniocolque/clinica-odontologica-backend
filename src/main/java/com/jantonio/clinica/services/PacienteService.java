@@ -1,14 +1,16 @@
 package com.jantonio.clinica.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import com.jantonio.clinica.models.Paciente;
+import com.jantonio.clinica.models.dto.PacienteDTO;
 
 public interface PacienteService {
-	List<Paciente> listar();
-	Optional<Paciente> buscar(Long id);
-	Paciente crear(Paciente paciente);
+	List<PacienteDTO> listar();
+	Optional<PacienteDTO> buscar(Long id) throws Exception;
+	PacienteDTO crear(PacienteDTO pacientedto);
     void eliminar(Long id);
-    Paciente editar(Paciente paciente);
+    PacienteDTO editar(PacienteDTO pacientedto);
+    List<PacienteDTO> buscarPorFechaAlta(LocalDate fecha);
 }

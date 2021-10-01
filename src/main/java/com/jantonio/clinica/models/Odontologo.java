@@ -13,27 +13,35 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity
 @Table(name="odontologos")
 @ToString
+@Getter @Setter
 public class Odontologo {
 	
 	@Id
     @SequenceGenerator(name = "odontologo_sequence", sequenceName = "odontologo_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "odontologo_sequence")
-	@Getter @Setter
+	
 	private Long id;
-	@Getter @Setter
     private String nombre;
-	@Getter @Setter
     private String apellido;
-	@Getter @Setter
     private Integer matricula;
-
+	
+    @OneToMany(mappedBy = "odontologo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Getter @Setter
+    @ToString.Exclude
+    @JsonIgnore
+    private Set<Turno> turnos = new HashSet<>();
+    
     public Odontologo() {
     }
 
@@ -48,11 +56,5 @@ public class Odontologo {
         this.nombre = nombre;
         this.apellido = apellido;
         this.matricula = matricula;
-        /*this.pacientes = pacientes;*/
     }
-    /*
-    @OneToMany(mappedBy = "odontologo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @Getter @Setter
-    private Set<Paciente> pacientes = new HashSet<>();
-    */
 }

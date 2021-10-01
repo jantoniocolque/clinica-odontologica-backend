@@ -1,6 +1,8 @@
 package com.jantonio.clinica.models;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,71 +11,50 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity
 @Table(name ="pacientes")
 @ToString
+@Getter @Setter
 public class Paciente {
 	
 	@Id
     @SequenceGenerator(name = "paciente_sequence", sequenceName = "paciente_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "paciente_sequence")
-	@Getter @Setter
 	private Long id;
-	
-	@Getter @Setter
     private String nombre;
-	
-	@Getter @Setter
     private String apellido;
-	
-	@Getter @Setter
     private String dni;
-	
-	@Getter @Setter
-    private Date fechaIngreso;
+    private LocalDate fechaAlta;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_domicilios",referencedColumnName = "id")
-	@Getter @Setter
+	@JoinColumn(name="id_domicilio",referencedColumnName = "id")
     private Domicilio domicilio;
 	
-	/*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_odontologo")
-	@Getter @Setter
-	@ToString.Exclude
-    private Odontologo odontologo;*/
-
+	@OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @JsonIgnore
+    private Set<Turno> turnos = new HashSet<>();
+	
     public Paciente() {
     }
 
-    public Paciente(Long id, String nombre, String apellido, String dni, Date fechaIngreso, Domicilio domicilio) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-        this.fechaIngreso = fechaIngreso;
-        this.domicilio = domicilio;
-    }
-
-    public Paciente(String nombre, String apellido, String dni, Date fechaIngreso, Domicilio domicilio) {
-
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-        this.fechaIngreso = fechaIngreso;
-        
-    }
-    
-    
-    
+	public Paciente(String nombre, String apellido, String dni, LocalDate fechaAlta, Domicilio domicilio) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.fechaAlta = fechaAlta;
+		this.domicilio = domicilio;
+	}
 }

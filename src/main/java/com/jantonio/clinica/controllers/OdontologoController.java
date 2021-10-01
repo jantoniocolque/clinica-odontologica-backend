@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.jantonio.clinica.models.Odontologo;
-import com.jantonio.clinica.models.Paciente;
+import com.jantonio.clinica.models.dto.OdontologoDTO;
 import com.jantonio.clinica.services.OdontologoService;
 
 @RestController
@@ -30,15 +28,15 @@ public class OdontologoController {
 	private OdontologoService odontologoService;
 
     @PostMapping()
-    public ResponseEntity<Odontologo> guardar(@RequestBody Odontologo odontologo) {
-    	Odontologo response = odontologoService.crear(odontologo);
+    public ResponseEntity<OdontologoDTO> guardar(@RequestBody OdontologoDTO odontologo) {
+    	OdontologoDTO response = odontologoService.crear(odontologo);
     	logger.info("Se guardo el odontologo "+odontologo);
     	return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Odontologo> buscar(@PathVariable Long id) {
-        Odontologo odontologo = odontologoService.buscar(id).orElse(null);
+    public ResponseEntity<OdontologoDTO> buscar(@PathVariable Long id) {
+        OdontologoDTO odontologo = odontologoService.buscar(id).orElse(null);
         if(odontologo == null) {
         	logger.warn("No se encontro un odontologo con el id: "+id);
         	return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -48,7 +46,7 @@ public class OdontologoController {
     }
 
     @PutMapping()
-    public ResponseEntity<Odontologo> actualizar(@RequestBody Odontologo odontologo) {
+    public ResponseEntity<OdontologoDTO> actualizar(@RequestBody OdontologoDTO odontologo) {
         if ( odontologo.getId() != null && odontologoService.buscar(odontologo.getId()).isPresent()) {
         	if(odontologoService.editar(odontologo) == null)
         	 logger.info("Se actualizo con exito, nuevo odontologo "+odontologo);
@@ -60,7 +58,7 @@ public class OdontologoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable Long id) {
-    	Optional<Odontologo> o = odontologoService.buscar(id);
+    	Optional<OdontologoDTO> o = odontologoService.buscar(id);
         if (o.isPresent()) {
             odontologoService.eliminar(id);
             logger.info("Se elimino con exito al odontologo "+o.get());
@@ -70,16 +68,9 @@ public class OdontologoController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
     @GetMapping
-    public ResponseEntity<List<Odontologo>> listar(){
-    	List<Odontologo> odontologos= odontologoService.listar();
+    public ResponseEntity<List<OdontologoDTO>> listar(){
+    	List<OdontologoDTO> odontologos= odontologoService.listar();
 		logger.info("Devolvemos una lista de "+odontologos.size()+" odontologos");
 		return ResponseEntity.ok(odontologos);
     }
-    
-    /*@PostMapping("/paciente")
-    public ResponseEntity<Odontologo> guardarPaciente(@RequestBody Paciente paciente){
-    	Odontologo o = paciente.getOdontologo();
-    	o.addPaciente(paciente);
-    	return ResponseEntity.ok(o);
-    }*/
 }

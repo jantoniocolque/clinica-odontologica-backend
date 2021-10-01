@@ -7,28 +7,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jantonio.clinica.models.Odontologo;
+import com.jantonio.clinica.models.dto.OdontologoDTO;
+import com.jantonio.clinica.models.dto.converters.OdontologoConverter;
 import com.jantonio.clinica.repository.OdontologoRepository;
 import com.jantonio.clinica.services.OdontologoService;
 
 @Service
 public class OdontologoServiceImpl implements OdontologoService{
+	@Autowired
+	private OdontologoConverter converter;
 	
 	@Autowired
 	private OdontologoRepository odontologoRepository;
 
 	@Override
-	public List<Odontologo> listar() {
-		return odontologoRepository.findAll();
+	public List<OdontologoDTO> listar() {
+		return converter.odontologoToOdontologoDTO(odontologoRepository.findAll());
 	}
 
 	@Override
-	public Optional<Odontologo> buscar(Long id) {
-		return odontologoRepository.findById(id);
+	public Optional<OdontologoDTO> buscar(Long id) {
+		Optional<Odontologo> odontologo = odontologoRepository.findById(id);
+		return Optional.of(converter.odontologoToOdontologoDTO(odontologo.get()));
 	}
 
 	@Override
-	public Odontologo crear(Odontologo odontologo) {
-		return odontologoRepository.save(odontologo);
+	public OdontologoDTO crear(OdontologoDTO odontologodto) {
+		Odontologo odontologo = converter.odontologodtoToOdontologo(odontologodto);
+		return converter.odontologoToOdontologoDTO(odontologoRepository.save(odontologo));
 	}
 
 	@Override
@@ -37,8 +43,8 @@ public class OdontologoServiceImpl implements OdontologoService{
 	}
 
 	@Override
-	public Odontologo editar(Odontologo odontologo) {
-		return odontologoRepository.save(odontologo);
+	public OdontologoDTO editar(OdontologoDTO odontologodto) {
+		Odontologo odontologo = converter.odontologodtoToOdontologo(odontologodto);
+		return converter.odontologoToOdontologoDTO(odontologoRepository.save(odontologo));
 	}
-
 }
