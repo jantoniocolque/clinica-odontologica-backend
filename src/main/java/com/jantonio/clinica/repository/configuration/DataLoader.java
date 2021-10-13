@@ -10,9 +10,9 @@ import com.jantonio.clinica.models.TipoUsuario;
 import com.jantonio.clinica.models.Usuario;
 import com.jantonio.clinica.repository.UsuarioRepository;
 
-//@Component
-//public class DataLoader implements ApplicationRunner{
-	/*@Autowired
+@Component
+public class DataLoader implements ApplicationRunner{
+	@Autowired
 	private UsuarioRepository usuarioRepository;
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -21,6 +21,6 @@ import com.jantonio.clinica.repository.UsuarioRepository;
 		//String password2 = passwordEncoder.encode("antares1234");
 		usuarioRepository.save(new Usuario("antares@odontologica.com",password,TipoUsuario.ADMINISTRADOR));
 		//usuarioRepository.save(new Usuario("jefe@gmail.com",password2,TipoUsuario.INVITADO));
-	}*/
+	}
 
-//}
+}
