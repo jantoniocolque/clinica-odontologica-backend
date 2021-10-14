@@ -1,4 +1,5 @@
 # clinica-odontologica-backend
+Swagger API: https://api-clinica-odontologica.herokuapp.com/
 ### API para la gestion de una clinica odontologica
 Funcionalidades USUARIO:
   1. Login de un usuario que en esta logica de negocio equivale a un paciente
